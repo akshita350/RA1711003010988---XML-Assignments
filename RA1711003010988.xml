@@ -1,0 +1,358 @@
+                                                    FACULTY OF ENGINEERING & TECHNOLOGY, SRMIST
+                                                   DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING
+Course Code and Title:   15SE332E– XML and Web services
+
+Semester : VII 				                             Assignment –I 				Date:10/08/2020
+
+Write a Document Type Definition (DTD) to validate the XML file for book information and display the XML file as follows.
+Tree structure, Internal DTD and External DTD. The contents should be displayed in a table with five rows. The header of the table should be in Brown colour. And the Author names column should be displayed in dark blue colour and should be Capitalized and in bold. Use your own colours for remaining.
+Book information includes the following:
+Book title
+Author(s) Name
+Genre
+Copyright year
+Book Edition
+ISBN number
+Publisher name
+Book Price
+
+
+
+
+Source Code:
+
+
+a) Demonstrating DTD file
+book.dtd
+<!ELEMENT BOOKS (book)>
+<!ELEMENT book (Booktitle,Author,Genre,CopyrightYear,Bookedition,ISBNnumber,Publisher,price)>
+<!ELEMENT Booktitle (#PCDATA)>
+<!ELEMENT Author (#PCDATA)>
+<!ELEMENT Genre (#PCDATA)>
+<!ELEMENT CopyrightYear (#PCDATA)>
+<!ELEMENT Bookedition (#PCDATA)>
+<!ELEMENT ISBNnumber (#PCDATA)>
+<!ELEMENT Publisher (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+
+Books1.xml
+<?xml version="1.0" ?>
+
+<!DOCTYPE books SYSTEM "books.dtd">
+<books> 
+ <book>
+<Booktitle>Inside Mary</Booktitle>
+<Author>Haruno</Author>
+<Genre>Horror</Genre>
+<CopyrightYear>2000</CopyrightYear>
+<Bookedition>second</Bookedition>
+<ISBNnumber>20012</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>200</price>
+ </book>
+ <book>
+
+<Booktitle>Alice in Wonderland</Booktitle>
+<Author>Lewis Carol</Author>
+<Genre>Fiction</Genre>
+<CopyrightYear>1872</CopyrightYear>
+<Bookedition>first</Bookedition>
+<ISBNnumber>20018</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>500</price>
+ </book>
+<book>
+
+<Booktitle>Revolution 2020</Booktitle>
+<Author>Chetan Bhagat</Author>
+<Genre>Non-Fiction</Genre>
+<CopyrightYear>2005</CopyrightYear>
+<Bookedition>first</Bookedition>
+<ISBNnumber>20098</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>600</price>
+</book>
+<book>
+
+
+<Booktitle>19 Days</Booktitle>
+<Author>heaven</Author>
+<Genre>Fiction</Genre>
+<CopyrightYear>2012</CopyrightYear>
+<Bookedition>first</Bookedition>
+<ISBNnumber>20754</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>550</price>
+ </book>
+<book>
+
+
+<Booktitle>No longer Human</Booktitle>
+<Author>Osamu Dazai</Author>
+<Genre>Fictional Horror</Genre>
+<CopyrightYear>1967</CopyrightYear>
+<Bookedition>first</Bookedition>
+<ISBNnumber>209053</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>900</price>
+ </book>
+</books>
+
+
+
+
+b) Demonstrating XSD
+books.css
+books
+{
+color:brown;
+}
+book
+{
+color:brown;
+}
+Booktitle
+{
+color:blue;
+font-weight:bold;
+margin-left:10pt;
+display:block;
+}
+Author 
+{
+color:red;
+font-weight:bold;
+margin-left:10pt;
+}
+Genre
+{
+color:green;
+font-weight:bold;
+margin-left:10pt;
+}
+CopyrightYear
+{
+color:red;
+font-weight:bold;
+margin-left:10pt;
+}
+Bookedition
+{
+color:green;
+font-weight:bold;
+margin-left:10pt;
+}
+ISBNnumber
+{
+color:red;
+font-weight:bold;
+margin-left:10pt;
+}
+Publisher
+{
+color:green;
+font-weight:bold;
+margin-left:10pt;
+}
+price
+{
+color:brown;
+font-weight:bold;
+margin-left:10pt;
+}
+Books.xsd
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="books">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="book" minOccurs="1" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="book">
+<xs:complexType>
+<xs:sequence>
+<xs:element ref="Booktitle" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="Author" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="Genre" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="CopyrightYear" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="Bookedition" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="ISBNnumber" type="xs:string" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="Publisher" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="price" minOccurs="1" maxOccurs="1"/>
+</xs:sequence>
+</xs:complexType> 
+</xs:element>
+<xs:element name="Booktitle" type="xs.string"/>
+<xs:element name="Author" type="xs.string"/>
+<xs:element name="Genre" type="xs.string"/>
+<xs:element name="CopyrightYear" type="xs.string"/>
+<xs:element name="Bookedition" type="xs.string"/>
+<xs:element name="ISBNnumber" type="xs.string"/>
+<xs:element name="Publisher" type="xs.string"/>
+<xs:element name="price" type="xs.string"/>
+</xs:schema>
+Books.xsl
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/css" href="books.css"?>
+<books xmlns:xsi="http:www.w3.org/2001/xmlschema-instance"
+xsi:noNamespaceSchemaLocation="books.xsd">
+<book> 
+<Booktitle>Inside Mary</Booktitle>
+<Author>Haruno</Author>
+<Genre>Horror</Genre>
+<CopyrightYear>2000</CopyrightYear>
+<Bookedition>second</Bookedition>
+<ISBNnumber>20012</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>200</price>
+ </book>
+ <book>
+
+<Booktitle>Alice in Wonderland</Booktitle>
+<Author>Lewis Carol</Author>
+<Genre>Fiction</Genre>
+<CopyrightYear>1872</CopyrightYear>
+<Bookedition>first</Bookedition>
+<ISBNnumber>20018</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>500</price>
+ </book>
+<book>
+
+<Booktitle>Revolution 2020</Booktitle>
+<Author>Chetan Bhagat</Author>
+<Genre>Non-Fiction</Genre>
+<CopyrightYear>2005</CopyrightYear>
+<Bookedition>first</Bookedition>
+<ISBNnumber>20098</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>600</price>
+</book>
+<book>
+
+
+<Booktitle>19 Days</Booktitle>
+<Author>heaven</Author>
+<Genre>Fiction</Genre>
+<CopyrightYear>2012</CopyrightYear>
+<Bookedition>first</Bookedition>
+<ISBNnumber>20754</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>550</price>
+ </book>
+<book>
+
+
+<Booktitle>No longer Human</Booktitle>
+<Author>Osamu Dazai</Author>
+<Genre>Fictional Horror</Genre>
+<CopyrightYear>1967</CopyrightYear>
+<Bookedition>first</Bookedition>
+<ISBNnumber>209053</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>900</price>
+ </book>
+</books>
+
+
+
+
+c) Demonstrating XSL
+books.xsl
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:template match="/">
+<html>
+ <head>
+ <title> books</title></head>
+ <body>
+ <table border="1">
+ <tr><th>Booktitle</th>
+ <th> Author</th>
+ <th> Genre</th>
+ <th>CopyrightYear</th>
+ <th>Bookedition</th>
+<th>ISBNnumber</th>
+ <th>Publisher</th>
+<th>price</th>
+ </tr>
+<xsl:for-each select="/books/book">
+<tr>
+<td bgcolor="green"><xsl:value-of select="Booktitle"/></td>
+<td bgcolor="red"><xsl:value-of select="Author"/></td>
+<td bgcolor="cyan"><xsl:value-of select="Genre"/></td>
+<td bgcolor="yellow"><xsl:value-of select="CopyrightYear" /></td>
+<td bgcolor="silver"><xsl:value-of select="Bookedition" /></td>
+<td bgcolor="yellow"><xsl:value-of select="ISBNnumber" /></td>
+<td bgcolor="silver"><xsl:value-of select="Publisher" /></td>
+<td bgcolor="blue"><xsl:value-of select="price" /></td>
+</tr>
+</xsl:for-each>
+</table>
+</body>
+</html>
+</xsl:template>
+</xsl:stylesheet>
+Books3.xml
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="books.xsl"?>
+<books>
+<book>
+<Booktitle>Inside Mary</Booktitle>
+<Author>Haruno</Author>
+<Genre>Horror</Genre>
+<CopyrightYear>2000</CopyrightYear>
+<Bookedition>second</Bookedition>
+<ISBNnumber>20012</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>200</price>
+ </book>
+ <book>
+
+<Booktitle>Alice in Wonderland</Booktitle>
+<Author>Lewis Carol</Author>
+<Genre>Fiction</Genre>
+<CopyrightYear>1872</CopyrightYear>
+<Bookedition>first</Bookedition>
+<ISBNnumber>20018</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>500</price>
+ </book>
+<book>
+
+<Booktitle>Revolution 2020</Booktitle>
+<Author>Chetan Bhagat</Author>
+<Genre>Non-Fiction</Genre>
+<CopyrightYear>2005</CopyrightYear>
+<Bookedition>first</Bookedition>
+<ISBNnumber>20098</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>600</price>
+</book>
+<book>
+
+
+<Booktitle>19 Days</Booktitle>
+<Author>heaven</Author>
+<Genre>Fiction</Genre>
+<CopyrightYear>2012</CopyrightYear>
+<Bookedition>first</Bookedition>
+<ISBNnumber>20754</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>550</price>
+ </book>
+<book>
+
+
+<Booktitle>No longer Human</Booktitle>
+<Author>Osamu Dazai</Author>
+<Genre>Fictional Horror</Genre>
+<CopyrightYear>1967</CopyrightYear>
+<Bookedition>first</Bookedition>
+<ISBNnumber>209053</ISBNnumber>
+<Publisher>Penguin Books</Publisher>
+<price>900</price>
+ </book>
+</books> 
